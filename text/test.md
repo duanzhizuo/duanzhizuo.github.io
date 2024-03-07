@@ -1,3 +1,3 @@
 下面是截图
 
-![](./images/a.png)
+![](https://duanzhizuo.github.io/text/images/a.png)
