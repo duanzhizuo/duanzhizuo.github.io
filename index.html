@@ -4,5 +4,60 @@
   <body>
     <h1>Welcome My Github </h1>
     <a href="./text/test.md">test.md</a>
+@echo off
+chcp 65001 >nul
+echo ==============================================
+echo   Windows 11 All Recent Records One-Click Cleanup
+echo ==============================================
+echo.
+
+:: 1. Clear recent document shortcuts (File Explorer - Recent)
+if exist "%AppData%\Microsoft\Windows\Recent\*.*" (
+    del /f /s /q "%AppData%\Microsoft\Windows\Recent\*.*"
+    echo ✅ Recent document records cleared
+) else (
+    echo ℹ️  Recent documents directory is empty, skipped
+)
+
+:: 2. Clear taskbar automatic jump lists (AutomaticDestinations)
+if exist "%AppData%\Microsoft\Windows\Recent\AutomaticDestinations\*.*" (
+    del /f /s /q "%AppData%\Microsoft\Windows\Recent\AutomaticDestinations\*.*"
+    echo ✅ Taskbar automatic jump list cleared
+) else (
+    echo ℹ️  Automatic destinations directory is empty, skipped
+)
+
+:: 3. Clear taskbar custom jump lists (CustomDestinations)
+if exist "%AppData%\Microsoft\Windows\Recent\CustomDestinations\*.*" (
+    del /f /s /q "%AppData%\Microsoft\Windows\Recent\CustomDestinations\*.*"
+    echo ✅ Taskbar custom jump list cleared
+) else (
+    echo ℹ️  Custom destinations directory is empty, skipped
+)
+
+:: 4. Clear Win+R Run dialog history
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /f >nul 2>&1
+echo ✅ Run dialog history cleared
+
+:: 5. Clear File Explorer address bar typed history
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths" /f >nul 2>&1
+echo ✅ File Explorer address bar history cleared
+
+:: 6. Clear recent document entries in Windows Registry
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs" /f >nul 2>&1
+echo ✅ Registry recent document records cleared
+
+echo.
+echo Restarting File Explorer to apply all changes...
+taskkill /f /im explorer.exe >nul 2>&1
+start explorer.exe
+
+echo.
+echo ==============================================
+echo ✅ All recent open records cleaned successfully!
+echo ==============================================
+pause
+
+  
   </body>
   </html>
